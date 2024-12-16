@@ -14,10 +14,21 @@ import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css/bundle";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import Contact from "../components/Contact";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase";
 
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconUrl: markerIcon,
+    iconRetinaUrl: markerIcon2x,
+    shadowUrl: markerShadow,
+});
 export default function Listing() {
   const auth = getAuth();
   const params = useParams();
@@ -135,7 +146,7 @@ export default function Listing() {
                 onClick={() => setContactLandlord(true)}
                 className="px-7 py-3 bg-blue-600 text-white font-medium text-sm uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg w-full text-center transition duration-150 ease-in-out "
               >
-                Contact Landlord
+                Contact Property Owner
               </button>
             </div>
           )}
